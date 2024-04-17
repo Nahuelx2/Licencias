@@ -1,0 +1,15 @@
+CREATE TABLE Licencias (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fecha DATE,
+    apellido TEXT,
+    nombre TEXT,
+    categoria TEXT,
+    agrupamiento TEXT,
+    area TEXT,
+    tipo_licencia TEXT,
+    desde DATE,
+    hasta DATE,
+    causa TEXT,
+    observacion TEXT
+);
+ 
