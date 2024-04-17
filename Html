@@ -4,42 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Registro de Licencias</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        form input[type="text"],
+        form input[type="date"],
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <h1>Sistema de Registro de Licencias</h1>
-    <form action="/agregar_licencia" method="POST">
-        <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" name="fecha" required><br>
+    <div class="container">
+        <h1>Sistema de Registro de Licencias</h1>
+        <form id="formulario-licencia" action="/agregar_licencia" method="POST">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required><br>
 
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" required><br>
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required><br>
 
-        <!-- Agregar los demás campos del formulario aquí -->
+            <!-- Agregar los demás campos del formulario aquí -->
 
-        <input type="submit" value="Agregar Licencia">
-    </form>
+            <input type="submit" value="Agregar Licencia">
+        </form>
 
-    <h2>Licencias Registradas</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>N°</th>
-                <th>Fecha</th>
-                <th>Apellido</th>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Agrupamiento</th>
-                <th>Área</th>
-                <th>Tipo de Licencia</th>
-                <th>Desde</th>
-                <th>Hasta</th>
-                <th>Causa</th>
-                <th>Observación</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Mostrar las licencias registradas aquí -->
-        </tbody>
-    </table>
+        <h2>Licencias Registradas</h2>
+        <table id="tabla-licencias">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Fecha</th>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Agrupamiento</th>
+                    <th>Área</th>
+                    <th>Tipo de Licencia</th>
+                    <th>Desde</th>
+                    <th>Hasta</th>
+                    <th>Causa</th>
+                    <th>Observación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Mostrar las licencias registradas aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('formulario-licencia').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('/agregar_licencia', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al agregar la licencia');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Aquí puedes actualizar la tabla de licencias con la nueva entrada
+                console.log('Licencia agregada correctamente');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
 </body>
 </html>
