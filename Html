@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Registro de Licencias</title>
+</head>
+<body>
+    <h1>Sistema de Registro de Licencias</h1>
+    <form action="/agregar_licencia" method="POST">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required><br>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required><br>
+
+        <!-- Agregar los demás campos del formulario aquí -->
+
+        <input type="submit" value="Agregar Licencia">
+    </form>
+
+    <h2>Licencias Registradas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>N°</th>
+                <th>Fecha</th>
+                <th>Apellido</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Agrupamiento</th>
+                <th>Área</th>
+                <th>Tipo de Licencia</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+                <th>Causa</th>
+                <th>Observación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Mostrar las licencias registradas aquí -->
+        </tbody>
+    </table>
+</body>
+</html>
